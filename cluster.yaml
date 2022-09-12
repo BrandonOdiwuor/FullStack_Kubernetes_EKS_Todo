@@ -1,0 +1,17 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: todo-application-cluster
+  region: us-east-1
+
+managedNodeGroups:
+  - name: worker-nodes
+    instanceType: t2.micro
+    minSize: 2
+    maxSize: 4
+    desiredCapacity: 3
+
+cloudWatch:
+    clusterLogging:
+        enableTypes: ["*"]
