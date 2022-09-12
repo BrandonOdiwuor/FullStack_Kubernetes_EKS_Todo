@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-reverseproxy-svc
+  labels:
+    service: nginx-reverseproxy
+spec:
+  replicas: {{ .Values.nginx.replicaCount }}
+  selector:
+    matchLabels:
+      service: nginx-reverseproxy
+  template:
+    metadata:
+      labels:
+        service: nginx-reverseproxy
+    spec:
+      containers:
+      - name: nginx-reverseproxy-svc
+        image: {{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}
+        imagePullPolicy: {{ .Values.nginx.image.pullPolicy }}
+        ports:
+        - containerPort: 80
