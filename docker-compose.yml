@@ -1,0 +1,36 @@
+version: '2'
+services:
+  redis-svc:
+    container_name: redis-svc
+    image: redis
+    expose:
+      - 6379
+  backend-svc:
+    container_name: backend-svc
+    build: 
+      context: ./services/web
+    image: brandonodiwuor/todo-backend
+    expose:
+      - 8000
+    volumes:
+      - ~/.aws/:/root/.aws/:ro
+    depends_on:
+      - redis-svc
+  nginx-svc:
+    container_name: nginx-svc
+    build: 
+      context: ./services/nginx-reverseproxy
+    image: brandonodiwuor/todo-reverseproxy
+    ports:
+      - 8080:80
+    depends_on:
+      - backend-svc
+  frontend-svc:
+    container_name: frontend-svc
+    build:
+      context: ./services/client
+    image: brandonodiwuor/todo-frontend
+    ports:
+      - 3000:80
+    depends_on:
+      - nginx-svc
