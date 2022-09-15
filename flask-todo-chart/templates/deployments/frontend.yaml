@@ -19,4 +19,11 @@ spec:
         image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
         imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
         ports:
-        - containerPort: 80
+        - name: http
+          containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
