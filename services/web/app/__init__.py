@@ -18,6 +18,12 @@ def create_app():
     from app.todo import todo as todo_blueprint
     app.register_blueprint(todo_blueprint)
 
+    @app.route("/healthz")
+    def heath_endpoint():
+        response = jsonify({'message': 'Healthy'})
+        response.status_code = 200
+        return response 
+
     @app.errorhandler(AuthError)
     def handle_auth_error(ex):
         response = jsonify(ex.error)
