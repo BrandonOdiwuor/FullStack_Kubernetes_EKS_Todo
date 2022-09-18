@@ -5,7 +5,9 @@ metadata:
   labels:
     service: nginx-reverseproxy
 spec:
+  {{- if not .Values.nginx.hpa.enabled }}
   replicas: {{ .Values.nginx.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       service: nginx-reverseproxy

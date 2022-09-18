@@ -8,18 +8,33 @@ backend:
     repository: brandonodiwuor/todo-backend
     tag: latest
     pullPolicy: IfNotPresent
-  replicaCount: 2
+  hpa:
+    enabled: true
+    replicaCount: 2
+    maxReplicas: 10
+    cpu:
+      targetAverageUtilization: 60
 
 frontend:
   image: 
     repository: brandonodiwuor/todo-frontend
     tag: latest
     pullPolicy: IfNotPresent
-  replicaCount: 1
+  hpa:
+    enabled: true
+    replicaCount: 1
+    maxReplicas: 2
+    cpu:
+      targetAverageUtilization: 60
 
 nginx:
   image: 
     repository: brandonodiwuor/todo-reverseproxy
     tag: latest
     pullPolicy: IfNotPresent
-  replicaCount: 1
+  hpa:
+    enabled: true
+    replicaCount: 1
+    maxReplicas: 2
+    cpu:
+      targetAverageUtilization: 60

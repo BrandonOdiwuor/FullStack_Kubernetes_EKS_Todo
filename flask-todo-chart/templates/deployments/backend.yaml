@@ -5,7 +5,9 @@ metadata:
   labels:
     service: backend
 spec:
+{{- if not .Values.backend.hpa.enabled }}
   replicas: {{ .Values.backend.replicaCount }}
+{{- end }}
   selector:
     matchLabels:
       service: backend
