@@ -12,8 +12,7 @@ backend:
     enabled: true
     replicaCount: 2
     maxReplicas: 10
-    cpu:
-      targetAverageUtilization: 60
+    cpu: 60
 
 frontend:
   image: 
@@ -24,8 +23,7 @@ frontend:
     enabled: true
     replicaCount: 1
     maxReplicas: 2
-    cpu:
-      targetAverageUtilization: 60
+    cpu: 60
 
 nginx:
   image: 
@@ -36,5 +34,4 @@ nginx:
     enabled: true
     replicaCount: 1
     maxReplicas: 2
-    cpu:
-      targetAverageUtilization: 60
+    cpu: 60
