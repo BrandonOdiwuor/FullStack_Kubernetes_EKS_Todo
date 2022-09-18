@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-svc
+  labels:
+    service: backend
+spec:
+{{- if not .Values.backend.hpa.enabled }}
+  replicas: {{ .Values.backend.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      service: backend
+  template:
+    metadata:
+      labels:
+        service: backend
+    spec:
+      containers:
+      - name: backend-svc
+        image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
+        imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+        ports:
+        - name: http
+          containerPort: 8000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+            initialDelaySeconds: 5
+            periodSecods: 5
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+        envFrom:
+        - configMapRef:
+            name: env-configmap
