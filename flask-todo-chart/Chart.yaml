@@ -1,8 +1,0 @@
-apiVersion: v2
-name: flask_todo_app
-description: A Helm chart for Flask Todo Kubernetes Application
-version: 0.1.0
-appVersion: "1.0.0"
-maintainers:
-  - name: Brandon W. Odiwuor
-    email: brandon.odiwuor@gmail.com
