@@ -5,8 +5,10 @@ metadata:
   labels:
     service: nginx-reverseproxy
 spec:
+  selector:
+    service: nginx-reverseproxy
   ports:
     - port: 80
       protocol: TCP
-  selector:
-    service: nginx-reverseproxy
+      targetPort: 80
+  type: LoadBalancer
