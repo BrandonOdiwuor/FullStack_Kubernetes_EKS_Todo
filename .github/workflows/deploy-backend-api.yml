@@ -26,4 +26,4 @@ jobs:
       with:
         context: ./services/web
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/todo-backend:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/todo-backend:latest
